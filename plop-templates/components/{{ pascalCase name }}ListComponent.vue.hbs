@@ -1,0 +1,61 @@
+<template>
+  <AsyncTable
+    :columns="columns"
+    :store="store"
+    :show-refresh-button="true"
+    title="{{ lastPartPascalCasePlural name }}"
+    view-permissions="dont-show"
+    add-permissions="create-{{ lastPartSnakeCasePlural name }}"
+    edit-permissions="update-{{ lastPartSnakeCasePlural name }}"
+    delete-permissions="delete-{{ lastPartSnakeCasePlural name }}"
+    :show-filter-button="true"
+  >
+
+    <template v-slot:body-cell-status={props}>
+        <async-status :modelValue="props.row" :store="store"/>
+    </template>
+  </AsyncTable>
+  <{{ pascalCase name }}Form/>
+</template>
+
+<script setup>
+import AsyncTable from "components/async/AsyncTable.vue";
+import AsyncStatus from "components/async/AsyncStatus.vue";
+import {useRoute, useRouter} from "vue-router";
+import {use{{ pascalCase name }}Store} from "stores/{{ lastPartCamelCaseWithPath name }}Store";
+import {{ pascalCase name }}Form from "components/{{ lastPartSnakeCasePlural name }}/{{ pascalCase name }}Form.vue";
+const store = use{{ pascalCase name }}Store();
+
+const route = useRoute()
+const router = useRouter()
+const {t}=store
+store.filters = {};
+
+
+const columns = [
+  {
+    name: "id",
+    align: "left",
+    label: t("label.sn"),
+    field: "id",
+    sortable: false
+  },
+  {
+    name: "created_at",
+    align: "left",
+    label: t("label.created_at"),
+    field: "created_at",
+    sortable: false,
+    format: (val) => {
+      return new Date(val).toLocaleString();
+    }
+  },
+  {
+    name: "actions",
+    align: "left",
+    label: t("label.actions"),
+    field: "actions",
+    sortable: false
+  },
+]
+</script>

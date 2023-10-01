@@ -1,0 +1,21 @@
+{
+  "name": "laxus-quasar-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "laxus-quasar-cli": "./index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "plop": "plop"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "plop": "^4.0.0",
+    "minimist": "^1.2.8",
+    "pluralize": "^8.0.0"
+  }
+}

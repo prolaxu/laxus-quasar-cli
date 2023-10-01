@@ -1,0 +1,84 @@
+<template>
+  <div class="row items-center">
+    <div :class="showAdd && showInfo ? 'col-md-10' : (!showAdd && !showInfo ? 'col-md-12' : 'col-md-11')">
+      <Select
+        v-model="computedValue"
+        :label="props.multiple?'{{ lastPartPascalCasePlural name }}':'{{ lastPartPascalCase name }}'"
+        :outlined="true"
+        :store="store"
+        :className="className"
+        optionLabel="title"
+        optionValue="id"
+        :rules="props.rules"
+        :readonly="props.readonly"
+      />
+    </div>
+    <div v-if="showInfo" class="col-md-1">
+      <q-btn
+        class="print-hide text-right"
+        color="primary"
+        flat
+        icon="mdi-information-outline"
+        round
+        size="sm">
+        <q-tooltip anchor="top right" class="bg-gray" self="bottom right">
+          Enable this option if this product is eligible for sales return
+        </q-tooltip>
+      </q-btn>
+    </div>
+    <div v-if="showAdd" class="col-md-1">
+      <add-btn
+        size="sm"
+        @onClick="store.formDialog = !store.formDialog"
+      />
+    </div>
+  </div>
+  <{{ pascalCase name }}Form/>
+</template>
+
+<script setup>
+import Select from "components/async/AsyncSelect.vue";
+import {computed} from "vue";
+import {use{{ pascalCase name }}Store} from "stores/{{ lastPartCamelCaseWithPath name }}Store";
+import {{ pascalCase name }}Form from "components/{{ lastPartSnakeCasePlural name }}/{{ pascalCase name }}Form.vue";
+
+const store = use{{ pascalCase name }}Store();
+
+const props = defineProps({
+  showAdd: {
+    default: false
+  },
+  className: {
+    default: ''
+  },
+  showInfo: {
+    default: false
+  },
+  modelValue: {
+    required: false
+  },
+  rules:{
+    type:Array,
+    default: () => []
+  },
+  readonly:{
+    type:Boolean,
+    default: false
+  },
+  multiple:{
+    type:Boolean,
+    default: false
+  }
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const computedValue = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(val) {
+    emit("update:modelValue", val);
+  }
+})
+</script>

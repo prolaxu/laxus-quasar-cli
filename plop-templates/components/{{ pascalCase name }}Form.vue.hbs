@@ -1,0 +1,58 @@
+<template>
+  <ResponsiveModel
+    :store="store"
+    :submit="submit"
+    name="{{ lastPartPascalCasePlural name }}"
+    submit-button="submit"
+  >
+    <template v-slot:body>
+      <q-form ref="formRef">
+        <div class="row">
+          <div class="col-12">
+            <validation-errors :errors="store.errors"/>
+          </div>
+        </div>
+        <div class="row q-col-gutter-xs justify-center">
+          <div class="col-12">
+            <file-uploader
+              v-model="store.formData.feature_image" name="feature_image" :label="$t('label.feature_image')"/>
+          </div>
+          <div class="col-12">
+            <text-field
+              v-model="store.formData.title"
+              :rules="[rules.required]"
+              :label="$t('label.title')"
+              name="title"
+              outlined
+            />
+          </div>
+      
+        </div>
+      </q-form>
+    </template>
+
+  </ResponsiveModel>
+
+</template>
+
+<script setup>
+import ResponsiveModel from "components/form/ResponsiveModel.vue";
+import validation from "src/composables/validation";
+import TextField from "components/form/TextField.vue";
+import ValidationErrors from "components/form/ValidationErrors.vue";
+import {storeToRefs} from "pinia";
+import {useRoute} from "vue-router";
+import {use{{ pascalCase name }}Store} from "stores/{{ lastPartCamelCaseWithPath name }}Store";
+import {onMounted} from "vue";
+import FileUploader from "components/form/FileUploader.vue";
+
+const {rules} = validation();
+const store = use{{ pascalCase name }}Store();
+const route = useRoute()
+
+const {formRef} = storeToRefs(use{{ pascalCase name }}Store());
+const submit = () => {
+  store.submitFormData()
+}
+onMounted(()=>{})
+</script>

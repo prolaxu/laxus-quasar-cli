@@ -1,0 +1,62 @@
+import {defineStore} from 'pinia'
+import useCommonStore from "stores/commonStore";
+import {ref} from "vue";
+
+export const use{{ pascalCase name }}Store = defineStore('use{{ pascalCase name }}Store', () => {
+  const storeUrl = ref('{{ slugCase name }}');
+  
+  const {
+    serverPagination,
+    filters,
+    loading,
+    all,
+    t,
+    q,
+    formRef,
+    formDialog,
+    formData,
+    errors,
+    getAll,
+    onRequest,
+    store,
+    update,
+    remove,
+    createFunction,
+    closeFunction,
+    edit,
+    submitFormData,
+    confirmDelete,
+    fetchPaged,
+    clearFunction,
+    toggleStatus,
+    statusOptions
+  } = useCommonStore(storeUrl.value)
+
+  return {
+    storeUrl,
+    serverPagination,
+    filters,
+    loading,
+    all,
+    t,
+    q,
+    formRef,
+    formDialog,
+    formData,
+    errors,
+    getAll,
+    onRequest,
+    store,
+    update,
+    remove,
+    createFunction,
+    closeFunction,
+    edit,
+    submitFormData,
+    confirmDelete,
+    fetchPaged,
+    clearFunction,
+    toggleStatus,
+    statusOptions
+  }
+})
