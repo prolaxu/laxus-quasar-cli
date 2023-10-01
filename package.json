@@ -1,6 +1,6 @@
 {
-  "name": "laxus-quasar-cli",
-  "version": "1.0.0",
+  "name": "@prolaxu/laxus-quasar-cli",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "bin": {
